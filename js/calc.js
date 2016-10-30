@@ -1,8 +1,4 @@
 //
-function Calculator(){
-	//
-}
-//
 function calculator(element){
 	//
 	var monitor = $("<div>").addClass("result");
@@ -27,10 +23,6 @@ function calculator(element){
 	.append(fnKeys)
 	.append(numberKeys);
 	//
-	//$(".infocalc")
-	//.append(infoLabel)
-	//.append(historyLabel);
-	
 	//Цифровые и функциональные кнопки
 	var Keys = [
 		{parrent: ".numberkeys", id: "0", label: 0, cls: "key-n", fn: press},
@@ -66,65 +58,11 @@ function calculator(element){
 		.addClass(cls)
 		.attr("id", id)
 		.text(label)
-		.on("click",{id: id}, fn);
-		//.on("click",{id: id}, logger)
+		.on("click",{id: id}, fn)
+		.on("click",{id: id}, logger);
 		//.on("click",{id: id}, logHistory);
 		$(parrent).append(newbtn);
 	};
-	//Журнал
-	//
-	var historyX = " ";
-	var historyLabel = " ";
-	var historyCalc = [];
-	//Запись журнала
-	function logHistory(event){
-		var id = event.data.id;
-		var sumbols = {
-			add: "+",
-			sub: "-",
-			div: "/",
-			mul: "*",
-			eqv: "=",
-			comma: ".",
-			leftParenthesis: "(",
-			rightParenthesis: ")",
-		};
-		//
-		numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-		//
-		if(id in sumbols){
-			historyLabel +="" + historyX;
-			historyX = "";
-			historyLabel += " " + sumbols[id] + " ";
-			setHistory();
-		}
-		else if(id == "minus"){
-			historyX = "" + -historyX;
-		}
-		else if(id == "pi"){
-			historyX += "&pi;";
-		}
-		else if (numbers.includes(+id)){
-			historyX += id;
-		};
-		if(id == "eqv"){
-			historyLabel += registr;
-			setHistory();
-			historyCalc.push(historyLabel);
-			historyX = "";
-			historyLabel = "";
-			setHistoryList();
-		};
-	};
-	//Вывод журнала
-	function setHistory(){
-		$(".history").html(historyLabel);
-	};
-	//Вывод списка операций
-	function setHistoryList(){
-		var res = historyCalc.map(function(item){return "<p>" + item + "<p>";}).join("");
-		$(".info").html(res)
-	}
 	//Вывод состояния переменных в консоль
 	function logger(event){
 		var id = event.data.id;
@@ -143,7 +81,6 @@ function calculator(element){
 	};
 	//Начальные установки
 	setResult(registr);
-	setHistory();
 	//Операции
 	var operations2 = {
 		add: function(x, y){return x + y;},
